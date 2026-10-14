@@ -1,10 +1,10 @@
 ﻿namespace PRG2_CarRegister_Bushra.Model
 {
-    public class StandardCar : Vehicle
+    public class Car : Vehicle
     {
         private int doors;
 
-        public StandardCar(string registrationNumber, string manufacturer, string model, int year, int doors)
+        public Car(string registrationNumber, string manufacturer, string model, int year, int doors)
     : base(registrationNumber, manufacturer, model, year)
         {
             
@@ -26,7 +26,7 @@
 
         public override string GetDescription()
 {
-    return $"{base.RegistrationNumber}\t{base.Manufacturer}\t{base.Model}\t{base.Year}\t{Doors}";
+   return $"Car\t{RegistrationNumber}\t{Manufacturer}\t{Model}\t{Year}\t{Doors}";
 }
     }
 }

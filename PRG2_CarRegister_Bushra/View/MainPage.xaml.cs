@@ -1,4 +1,5 @@
-﻿using PRG2_CarRegister_Bushra.Model;
+﻿
+using PRG2_CarRegister_Bushra.Model;
 using System.Collections.ObjectModel;
 
 namespace PRG2_CarRegister_Bushra.View;
@@ -33,23 +34,37 @@ public partial class MainPage : ContentPage
 
             }
 
+
             string registrationNumber = entryRegistrationNumber.Text ?? "";
             string model = entryModel.Text ?? "";
             string manufacturer = entryManufacturer.Text ?? "";
+
 
             Vehicle vehicle;
 
             switch (pickerType.SelectedItem?.ToString())
             {
-                case "Car":
                 case "Bil":
-                    vehicle = new StandardCar(
-                       registrationNumber,
-                       manufacturer,
-                       model,
-                       year,
-                       4);
+
+                    if (!int.TryParse(entryDoors.Text, out int doors))
+                    {
+                        await DisplayAlert(
+                            "Fel",
+                            "Ange ett giltigt antal dörrar.",
+                            "OK");
+                        return;
+                    }
+
+                    vehicle = new Car(
+                        registrationNumber,
+                        manufacturer,
+                        model,
+                        year,
+                        doors);
+
                     break;
+           
+    
 
                 case "MC":
                     vehicle = new MC(
@@ -57,11 +72,10 @@ public partial class MainPage : ContentPage
                         manufacturer,
                         model,
                         year,
-                        "Standard");
+                        "standard");
                     break;
 
                 case "Truck":
-                case "Lastbil":
                     vehicle = new Truck(
                         registrationNumber,
                         manufacturer,
@@ -97,7 +111,7 @@ public partial class MainPage : ContentPage
 
         if(radioCar.IsChecked)
         {
-            filteredList = vehicleList.OfType<StandardCar>();
+            filteredList = vehicleList.OfType<Car>();
         }
         else if (radioMC.IsChecked)
         {

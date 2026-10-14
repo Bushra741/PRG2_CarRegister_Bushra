@@ -5,20 +5,13 @@ public abstract class Vehicle
    
     // Medlemsvariabler
 
-
-
     private string registrationNumber = string.Empty;
     private string manufacturer = string.Empty;
     private string model = string.Empty;
     private int year;
     
     // Konstruktor (en metod med samma namn som klassen, som returnerar ett objekt)
-    public Vehicle(
-            
-     string registrationNumber,
-     string manufacturer,
-     string model,
-     int year)
+    public Vehicle(string registrationNumber, string manufacturer, string model, int year)
     {
         RegistrationNumber = registrationNumber;
         Manufacturer = manufacturer;
@@ -124,7 +117,7 @@ public abstract class Vehicle
                 if (!Regex.IsMatch(value, @"^[A-Za-zÅÄÖåäö\s\-]+$"))
 
                 {
-                    throw new ArgumentException("Årsmodellen måste bestå av fyra siffror.");
+                    throw new ArgumentException("Den inehåller otilllåtna tecken.");
                 }
             }
             if (!letters)
@@ -149,7 +142,6 @@ public abstract class Vehicle
                     $"Årsmodellen måste vara mellan 1895 och {DateTime.Today.Year}");
             }
             
-
             year = value;
         }
     }
